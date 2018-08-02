@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,7 +25,7 @@ public class UserManagementBean implements UserManagement {
     private static final Logger logger = LogManager.getLogger(UserManagementBean.class);
 
     @EJB
-    UserPersistenceManager userPersistenceManagement;
+    UserPersistenceManager userPersistenceManager;
 
     @Override
     public UserDTO createUser(UserDTO userDTO) throws BusinessExeption {
@@ -33,11 +34,18 @@ public class UserManagementBean implements UserManagement {
         if(!isUserValidForCreation(userDTO) || !isValidEmail(userDTO.getEmail())) {
             throw new BusinessExeption(ExeptionCode.USER_VALIDATION_EXEPTION);
         }
+        if(true) {
+            throw new BusinessExeption(ExeptionCode.EMAIL_EXISTS_EXEPTION);
+        }
         User user = UserDTOHelper.toentity(userDTO);
-        userPersistenceManagement.addUser(user);
+        userPersistenceManager.addUser(user);
         return UserDTOHelper.fromentity(user);
     }
 
+    protected String createSuffix(){
+        List<User> users = (List<User>) userPersistenceManager.findUserNameStartingWith("ionion");
+        return null;
+    }
 
     protected String generateUsername(@NotNull final String firstName, @NotNull final String lastName){
 

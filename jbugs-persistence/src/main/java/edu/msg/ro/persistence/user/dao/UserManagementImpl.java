@@ -77,4 +77,17 @@ public class UserManagementImpl implements UserPersistenceManager {
         Query q = em.createQuery("SELECT r FROM Role r");
         return q.getResultList();
     }
+
+    @Override
+    public User getUserWithEmail(String email) {
+    Query q = em.createQuery("select u from User u where u.email=" + email );
+    return null;
+    }
+
+
+    @Override
+    public List<User> findUserNameStartingWith(String username) {
+        Query q = em.createQuery("select * from User where u.username like "+username);
+        return null;
+    }
 }

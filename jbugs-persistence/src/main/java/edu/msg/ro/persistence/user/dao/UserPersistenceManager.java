@@ -20,4 +20,6 @@ public interface UserPersistenceManager extends Serializable {
     Role updateRole(Role role);
     Role getRoleForId(long id);
     List<Role> getAllRoles();
+    User getUserWithEmail(String email);
+    List<User> findUserNameStartingWith(String username);
 }

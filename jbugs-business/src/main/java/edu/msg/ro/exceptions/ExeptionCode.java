@@ -1,7 +1,9 @@
 package edu.msg.ro.exceptions;
 
 public enum ExeptionCode {
-    USER_VALIDATION_EXEPTION(1,"Validation exeption");
+    USER_VALIDATION_EXEPTION(1,"Validation exeption"),
+    EMAIL_EXISTS_EXEPTION(2,"The Email already exists");
+
     int id;
     String message;
 
